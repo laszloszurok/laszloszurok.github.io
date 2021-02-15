@@ -6,8 +6,6 @@
     --link-fg-hover: #9c03fd;
 }
 
-html { scroll-behavior: smooth; }
-
 /* giving some offset for anchors, so 
  * the navbar won't cover them after 
  * scrolling to them */
@@ -16,6 +14,15 @@ html { scroll-behavior: smooth; }
     display: block;
     height: 70px;
     margin: -70px 0 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 body {
@@ -104,7 +111,7 @@ nav {
     text-decoration: none;
     padding:0.7em 0.7em;
     margin:0 0.3em 0.3em 0;
-    box-sizing: border-box;
+        box-sizing: border-box;
 }
 
 .menu a:hover {
@@ -221,11 +228,11 @@ code.language-terminal::before {
 
 /* style for the fontawesome shortcode */
 .inline-svg {
-  display: inline-block;
-  height: 1.15rem;
-  width: 1.15rem;
-  top: 0.15rem;
-  position: relative;
+    display: inline-block;
+    height: 1.15rem;
+    width: 1.15rem;
+    top: 0.15rem;
+    position: relative;
 }
 
 #TableOfContents {
@@ -307,7 +314,6 @@ code.language-terminal::before {
 
 @media only screen and (max-width: 450px) {
     footer { padding: 2em; }
-    body { width: 100%; margin-right: -3em; }
 }
 
 @media only screen and (max-width: 1700px) {
