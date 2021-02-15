@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rice on bit-flip</title>
+    <link>http://example.org/tags/rice/</link>
+    <description>Recent content in rice on bit-flip</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 20 Jul 2020 17:28:04 +0200</lastBuildDate><atom:link href="http://example.org/tags/rice/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to customize dwm</title>
+      <link>http://example.org/posts/dwm-rice/</link>
+      <pubDate>Mon, 20 Jul 2020 17:28:04 +0200</pubDate>
+      
+      <guid>http://example.org/posts/dwm-rice/</guid>
+      <description>This tutorial will go over how to customize DWM. I&amp;rsquo;m going to use my own DWM build as an example. This post was made for a request from a Reddit user after I posted an image of my Arch linux setup in r/unixporn.</description>
+    </item>
+    
+  </channel>
+</rss>

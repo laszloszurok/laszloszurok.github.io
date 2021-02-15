@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Extend your home network | bit-flip</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/custom-style.css" />
+
+    </head>
+
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="/"><img src="/img/logo.png" alt="logo" id="logo-img" /></a>
+            </div>
+            <div class="menu">
+                <ul class="menu">
+                    
+                    <li><a href="/">Home</a></li>
+                    
+                    <li><a href="/arch-notes/">Arch-notes</a></li>
+                    
+                    <li><a href="/posts/">Posts</a></li>
+                    
+                    <li><a href="/contact/">Contact</a></li>
+                    
+                    <li><a href="/index.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Extend your home network</span></h1>
+    
+    <h2 class="date">2020/08/18</h2>
+</div>
+
+
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#factory-reset-the-secondary-router">Factory reset the secondary router</a></li>
+    <li><a href="#accessing-the-settings">Accessing the settings</a></li>
+    <li><a href="#repeater-settings">Repeater settings</a></li>
+    <li><a href="#changing-the-ssid">Changing the SSID</a></li>
+    <li><a href="#rebooting">Rebooting</a></li>
+  </ul>
+</nav>
+
+
+<main>
+    <p>A repeater is a device that is used to extend transmissions so that the signal can cover longer distances.</p>
+<p>If you want to extend the coverage of your wireless network, you can set up a secondary router to connect to your main router and act as a repeater.
+Nowadays most routers have this functionality built in.</p>
+<p>In this tutorial I&rsquo;m going to show an example setup with a D-Link device as the repeater.</p>
+<h2 id="factory-reset-the-secondary-router">Factory reset the secondary router</h2>
+<p>First you have to reset the device to its factory settings. Most routers have a little button on the back, labeled as RESET. You usually have to hold that button for
+10 seconds to perform a factory reset.</p>
+<h2 id="accessing-the-settings">Accessing the settings</h2>
+<p>Connect the secondary router to your computer with an ethernet cable. Check the devices back for its default IP address and login credentials. In my case the IP is 192.168.0.1. Enter that IP
+address to the url bar of your webbrowser to open the configuration page. Log in with the given credentials (usually admin-admin).</p>
+<h2 id="repeater-settings">Repeater settings</h2>
+<p>In the case of my D-Link device, the setting we&rsquo;re looking for is under the Wireless -&gt; Wireless Repeater menupoint.</p>
+
+    <img src="/img/blog/router-repeater/menupoint.png"  alt="Where"  class="center"  style="border-radius: 4px;"  />
+
+
+<p>Here, click Site Survey to begin the setup and wait until the process is finished.</p>
+<p>After that, select the network you want to extend and click next.</p>
+
+    <img src="/img/blog/router-repeater/select-network.png"  alt="Where"  class="center"  style="border-radius: 4px;"  />
+
+
+<p>Now you will have to enter the password for the extended network, which has to match with the password of the network you want to extend.</p>
+
+    <img src="/img/blog/router-repeater/security.png"  alt="Where"  class="center"  style="border-radius: 4px;"  />
+
+
+<p>The next step is to change the default IP address of the device, so it won&rsquo;t conflict with the address of the main access point. I&rsquo;m going to change it to 192.168.0.2, because 192.168.0.1 is the address of the main router.</p>
+
+    <img src="/img/blog/router-repeater/change-ip.png"  alt="Where"  class="center"  style="border-radius: 4px;"  />
+
+
+<h2 id="changing-the-ssid">Changing the SSID</h2>
+<p>Now locate the wireless settings in your device (in my case Wireless -&gt; Wireless Basics) and enter an SSID for the device that differs from the SSID of the main router.</p>
+<h2 id="rebooting">Rebooting</h2>
+<p>Save your settings and look for the reboot option. In my case it&rsquo;s under Maintenance -&gt; Reboot.</p>
+<p>Give a little time for the repeater to boot up, then you should be able to connect to the network through it.</p>
+
+</main>
+
+<div class="pagination__buttons">
+    
+
+    
+    <span class="button next">
+        <a href="http://example.org/posts/dwm-rice/">
+            <span class="button__text">How to customize dwm</span>
+            <span class="button__icon">→</span>
+        </a>
+    </span>
+    
+</div>
+</div>
+
+<footer>
+    <div class="copyright">
+
+        <span>&copy; 2021</span>
+        <span><a href="http://example.org">László Szurok</a></span>
+        <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+
+    </div>
+    <p>The Source Code For This Site Can Be Found On GitHub</p>
+
+</footer>
+</body>
+</html>
+

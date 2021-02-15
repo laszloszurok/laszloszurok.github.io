@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Post-Installation | bit-flip</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/custom-style.css" />
+
+    </head>
+
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="/"><img src="/img/logo.png" alt="logo" id="logo-img" /></a>
+            </div>
+            <div class="menu">
+                <ul class="menu">
+                    
+                    <li><a href="/">Home</a></li>
+                    
+                    <li><a href="/arch-notes/">Arch-notes</a></li>
+                    
+                    <li><a href="/posts/">Posts</a></li>
+                    
+                    <li><a href="/contact/">Contact</a></li>
+                    
+                    <li><a href="/index.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Post-Installation</span></h1>
+    
+    <h2 class="date">2020/07/02</h2>
+</div>
+
+
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#generating-the-filesystem-table">Generating the filesystem table</a></li>
+    <li><a href="#chroot-into-the-installed-system">Chroot into the installed system</a></li>
+    <li><a href="#timezone-and-locale">Timezone and locale</a></li>
+    <li><a href="#network-configuration">Network configuration</a></li>
+    <li><a href="#installing-important-packages">Installing important packages</a></li>
+    <li><a href="#setting-up-grub-grand-unified-bootloader">Setting up GRUB (Grand Unified Bootloader)</a></li>
+    <li><a href="#user-account-settings">User account settings</a></li>
+    <li><a href="#exiting-and-rebooting">Exiting and rebooting</a></li>
+    <li><a href="#network-services-and-wifi">Network services and WiFi</a></li>
+    <li><a href="#accessing-the-aur">Accessing the AUR</a></li>
+    <li><a href="#setting-up-a-graphical-environment-xorg">Setting up a graphical environment (xorg)</a></li>
+    <li><a href="#configuring-the-touchpad">Configuring the touchpad</a></li>
+    <li><a href="#enabling-sound">Enabling sound</a></li>
+  </ul>
+</nav>
+
+
+<main>
+    <h2 id="generating-the-filesystem-table">Generating the filesystem table</h2>
+<p>Creating the <a href="https://wiki.archlinux.org/index.php/Fstab" target="_blank">fstab</a>
+ file:</p>
+<pre><code class="language-terminal" data-lang="terminal">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre><h2 id="chroot-into-the-installed-system">Chroot into the installed system</h2>
+<p>With the <a href="https://wiki.archlinux.org/index.php/Chroot" target="_blank">chroot</a>
+ command you leave the live enviroment and enter the newly installed system.</p>
+<pre><code class="language-terminal" data-lang="terminal">arch-chroot /mnt
+</code></pre><h2 id="timezone-and-locale">Timezone and locale</h2>
+<p>Choose your <a href="https://wiki.archlinux.org/index.php/System_time#Time_zone" target="_blank">timezone</a>
+:</p>
+<pre><code class="language-terminal" data-lang="terminal">ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime
+</code></pre><p>Run <a href="https://wiki.archlinux.org/index.php/System_time#Hardware_clock" target="_blank">hwclock</a>
+ to generate /etc/adjtime:</p>
+<pre><code class="language-terminal" data-lang="terminal">hwclock --systohc
+</code></pre><p>Uncomment the needed <a href="https://wiki.archlinux.org/index.php/Locale" target="_blank">locales</a>
+ in /etc/locale.gen (eg. en_US.UTF-8):</p>
+<pre><code class="language-terminal" data-lang="terminal">vim /etc/locale.gen
+</code></pre><p>Generate the locales:</p>
+<pre><code class="language-terminal" data-lang="terminal">locale-gen
+</code></pre><p>Set the LANG variable in locale.conf:</p>
+<pre><code class="language-terminal" data-lang="terminal">echo LANG=en_US.UTF-8 &gt;&gt; /etc/locale.conf
+</code></pre><h2 id="network-configuration">Network configuration</h2>
+<p>Choose a <a href="https://wiki.archlinux.org/index.php/Network_configuration#Set_the_hostname" target="_blank">hostname</a>
+ (eg. arch):</p>
+<pre><code class="language-terminal" data-lang="terminal">echo arch &gt;&gt; /etc/hostname
+</code></pre><p>To edit the <a href="https://wiki.archlinux.org/index.php/Network_configuration#Local_hostname_resolution" target="_blank">hosts</a>
+ file:</p>
+<pre><code class="language-terminal" data-lang="terminal">vim /etc/hosts
+</code></pre><p>Enter the following information (replace arch with your hostname):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">127.0.0.1   localhost
+::1             localhost
+127.0.1.1   arch.localdomain    arch
+</code></pre></div><h2 id="installing-important-packages">Installing important packages</h2>
+<pre><code class="language-terminal" data-lang="terminal">pacman -S grub efibootmgr networkmanager wireless_tools wpa_supplicant dhcpcd os-prober mtools dosfstools base-devel linux-headers
+</code></pre><ul>
+<li><strong>grub</strong>: the bootloader</li>
+<li><strong>efibootmgr</strong>: only needed if you installed the system in UEFI mode</li>
+<li><strong>networkmanager, wireless-tools, wpa_supplicant, dhcpcd</strong>: networking tools</li>
+<li><strong>os-prober</strong>: needed if you want to dualboot this system with an other OS later</li>
+<li><strong>mtools, dosfstools</strong>: filesystem tools</li>
+<li><strong>base-devel, linux-headers</strong>: package groups which include basic libraries that you will probably need later</li>
+</ul>
+<h2 id="setting-up-grub-grand-unified-bootloader">Setting up GRUB (Grand Unified Bootloader)</h2>
+<p>Installing <a href="https://wiki.archlinux.org/index.php/GRUB" target="_blank">GRUB</a>
+:</p>
+<p>UEFI:</p>
+<pre><code class="language-terminal" data-lang="terminal">grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=GRUB
+</code></pre><p>MBR (use the device name the system is installed on):</p>
+<pre><code class="language-terminal" data-lang="terminal">grub-install --target=i386-pc /dev/sda
+</code></pre><p>Creating the configuration file:</p>
+<pre><code class="language-terminal" data-lang="terminal">grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre><h2 id="user-account-settings">User account settings</h2>
+<p>More info on the <a href="https://wiki.archlinux.org/index.php/Users_and_groups" target="_blank">wiki</a>
+.</p>
+<p>Set the root password:</p>
+<pre><code class="language-terminal" data-lang="terminal">passwd
+</code></pre><p>Create a user (replace username with your own username):</p>
+<pre><code class="language-terminal" data-lang="terminal">useradd -m username
+</code></pre><p>Set a password for the new user:</p>
+<pre><code class="language-terminal" data-lang="terminal">passwd username
+</code></pre><p>Add the user to some important groups (no spaces after the commas):</p>
+<pre><code class="language-terminal" data-lang="terminal">usermod -aG wheel,audio,video,optical,storage username
+</code></pre><p>To let the new user gain root privileges when needed, we have to edit a file called sudoers. Open the file with the following command:</p>
+<pre><code class="language-terminal" data-lang="terminal">visudo
+</code></pre><p>Uncomment this line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">%wheel ALL<span style="color:#f92672">=(</span>ALL<span style="color:#f92672">)</span> ALL
+</code></pre></div><p>Save and exit the editor.</p>
+<h2 id="exiting-and-rebooting">Exiting and rebooting</h2>
+<p>To exit the installation back to the live enviroment:</p>
+<pre><code class="language-terminal" data-lang="terminal">exit
+</code></pre><p>To unmount all partitions:</p>
+<pre><code class="language-terminal" data-lang="terminal">umount -a
+</code></pre><p>Ignore the warning messages about the busy partitions.</p>
+<p>Now reboot the system and log in with the newly created user.</p>
+<pre><code class="language-terminal" data-lang="terminal">reboot
+</code></pre><h2 id="network-services-and-wifi">Network services and WiFi</h2>
+<p>Starting and eanbling <a href="https://wiki.archlinux.org/index.php/Network_configuration" target="_blank">network</a>
+ services:</p>
+<pre><code class="language-terminal" data-lang="terminal">systemctl enable --now NetworkManager
+</code></pre><p>Fix for wireless driver problems, in case your card is not recognized:</p>
+<p>Installing pre-requirements:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S dkms git
+</code></pre><p>Installing the wireless driver:</p>
+<pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/lwfinger/rtw88.git
+</code></pre><pre><code class="language-terminal" data-lang="terminal">cd rtw88
+</code></pre><pre><code class="language-terminal" data-lang="terminal">make
+</code></pre><pre><code class="language-terminal" data-lang="terminal">sudo make install
+</code></pre><p>Installing the driver as a <a href="https://wiki.archlinux.org/index.php/Kernel_module" target="_blank">kernel module</a>
+ with <a href="https://wiki.archlinux.org/index.php/Dynamic_Kernel_Module_Support" target="_blank">dkms</a>
+, so it will be rebuilt automatically at kernel updates:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo dkms add ./rtw88
+</code></pre><pre><code class="language-terminal" data-lang="terminal">sudo dkms install rtlwifi-new/0.6
+</code></pre><h2 id="accessing-the-aur">Accessing the AUR</h2>
+<p>The <a href="https://wiki.archlinux.org/index.php/Arch_User_Repository" target="_blank">Arch User Repository</a>
+ - as the name suggests - is a repository which contains software made by the community. You can not access this repository directly with pacman. Install an AUR helper to be able to install packages from this repo. Install <a href="https://github.com/Morganamilo/paru" target="_blank">paru</a>
+ with the following commands:</p>
+<pre><code class="language-terminal" data-lang="terminal">git clone https://aur.archlinux.org/paru.git
+</code></pre><pre><code class="language-terminal" data-lang="terminal">cd paru
+</code></pre><pre><code class="language-terminal" data-lang="terminal">makepkg -si
+</code></pre><h2 id="setting-up-a-graphical-environment-xorg">Setting up a graphical environment (xorg)</h2>
+<p>To install graphical drivers:</p>
+<p>For Intel cards:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S xf86-video-intel
+</code></pre><p>For AMD cards:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S xf86-video-amdgpu
+</code></pre><p>Install <a href="https://wiki.archlinux.org/index.php/Xorg" target="_blank">xorg</a>
+ and <a href="https://wiki.archlinux.org/index.php/Xinit" target="_blank">xorg-xinit</a>
+:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S xorg xorg-xinit
+</code></pre><p>I am going to install my build of <a href="https://wiki.archlinux.org/index.php/Dwm" target="_blank">DWM</a>
+, which needs the following two fonts to work properly:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S ttf-font-awesome ttf-dejavu
+</code></pre><p>A notification daemon, called <a href="https://wiki.archlinux.org/index.php/Dunst" target="_blank">dunst</a>
+, is also required:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S dunst
+</code></pre><p>To clone my config files from github:</p>
+<pre><code class="language-terminal" data-lang="terminal">git clone --bare https://github.com/laszloszurok/config $HOME/.cfg
+</code></pre><pre><code class="language-terminal" data-lang="terminal">/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedFiles no
+</code></pre><pre><code class="language-terminal" data-lang="terminal">/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout -f
+</code></pre><p>The .cfg folder will be a bare repo. This is a great way of managing config files, because you can basicly forget about it after the setup. You don&rsquo;t have to deal with the .cfg folder, just leave it there in your home directory.</p>
+<p>Set an alias:</p>
+<pre><code class="language-terminal" data-lang="terminal">alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+</code></pre><p>With the alias, you can use commands like this to manage your files:</p>
+<pre><code class="language-terminal" data-lang="terminal">config status
+</code></pre><pre><code class="language-terminal" data-lang="terminal">config add .bashrc
+</code></pre><pre><code class="language-terminal" data-lang="terminal">config commit -m &quot;updated .bashrc&quot;
+</code></pre><pre><code class="language-terminal" data-lang="terminal">config push
+</code></pre><p>Write this alias in your .bashrc or .zshrc to make it permanent. If you want to set up a new bare repo, you can do it like this:</p>
+<pre><code class="language-terminal" data-lang="terminal">git init --bare $HOME/.myconf
+</code></pre><pre><code class="language-terminal" data-lang="terminal">alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+</code></pre><pre><code class="language-terminal" data-lang="terminal">config config status.showUntrackedFiles no
+</code></pre><p>Then set a remote url for the repository.</p>
+<p>Cloning my <a href="https://suckless.org/" target="_blank">suckless</a>
+ builds:</p>
+<pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/laszloszurok/dwm.git source/suckless-builds/dwm
+</code></pre><pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/laszloszurok/dwmblocks.git source/suckless-builds/dwmblocks
+</code></pre><pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/laszloszurok/dmenu.git source/suckless-builds/dmenu
+</code></pre><pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/laszloszurok/st.git source/suckless-builds/st
+</code></pre><pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/laszloszurok/slock.git source/suckless-builds/slock
+</code></pre><pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/laszloszurok/wmname.git source/suckless-builds/wmname
+</code></pre><p>Go into the suckless-builds/dwm directory and execute the following command:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo make install
+</code></pre><p>Execute the above command for all of my suckless builds to install them. Now that DWM is installed we need a way to launch it. For this, you have to copy a configuration file to your home folder and edit it, as follows:</p>
+<pre><code class="language-terminal" data-lang="terminal">cp /etc/X11/xinit/xinitrc /home/youruser/.xinitrc
+</code></pre><p>Replace <em>&lsquo;youruser&rsquo;</em> with your username. Open the copied file and delete the last five lines containing twm, xclock, etc. Replace it with with the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">exec dwm
+</code></pre></div><p>Save the file and exit the editor. Now you should be able to launch dwm with this command:</p>
+<pre><code class="language-terminal" data-lang="terminal">startx
+</code></pre><p>Make sure you have a terminal emulator installed before running startx. If you installed all of my suckless builds you have <a href="https://wiki.archlinux.org/index.php/St" target="_blank">st</a>
+.</p>
+<p>If you don&rsquo;t want to launch the X server manually with the startx command every time you start up your computer, you have to install a display manager. I can recommend <a href="https://wiki.archlinux.org/index.php/LightDM" target="_blank">lightdm</a>
+.</p>
+<p>You will also need a greeter (a graphical login screen). My favourite one is called <a href="https://github.com/linuxmint/slick-greeter" target="_blank">lightdm-slick-greeter</a>
+. It&rsquo;s in the AUR, so you have to install it with an AUR helper, like paru.</p>
+<p>You have to do some configurations to make lightdm work. Open the file located at /etc/lightdm/lightdm.conf with a texteditor and uncomment the following line under the [LightDM] section:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[LightDM]
+...
+sessions-directory=/usr/share/lightdm/sessions:/usr/share/xsessions:/usr/share/wayland-sessions
+...
+</code></pre></div><p>Under the [Seat:*] section, set the default greeter to lightdm-slick-greeter and also set the user-session to dwm:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[Seat:*]
+...
+greeter-session=lightdm-slick-greeter
+...
+user-session=dwm
+...
+</code></pre></div><p>For the user-session to work we have to create a file called dwm.desktop. Place this file to the following location: /usr/share/xsessions/ . Open the file with a texteditor and write
+the following configuration into it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[Desktop Entry]
+Encoding=UTF-8
+Name=dwm
+Comment=Dynamic Window Manager
+Exec=/usr/local/bin/dwm
+Type=Application
+</code></pre></div><p>Now lightdm is configured, but you have to enable it with <a href="https://wiki.archlinux.org/index.php/Systemd" target="_blank">systemctl</a>
+, so it will automatically launch after boot.</p>
+<pre><code class="language-terminal" data-lang="terminal">systemctl enable lightdm
+</code></pre><p>If you want to set a wallpaper for the greeter, you can set it through the lightdm-slick-greeter configuration file, but there is a nice graphical tool in the AUR called
+<a href="https://github.com/linuxmint/lightdm-settings" target="_blank">lightdm-settings</a>
+ which lets you manage the greeter&rsquo;s settings in an easy way.</p>
+<p>To lock the screen after inactivity, you can use <a href="https://github.com/the-cavalry/light-locker" target="_blank">light-locker</a>
+ (install it with pacman).</p>
+<p>You can find <a href="https://tools.suckless.org/slock/" target="_blank">slock</a>
+ between my suckless builds, which is a very lightweight screen locker utility, but I recommend light-locker if you use lightdm.</p>
+<p>If you don&rsquo;t want a display manager you can just log in through the tty and use startx to launch a graphical session.</p>
+<p>To install the ArcDark theme:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S arc-gtk-theme arc-icon-theme
+</code></pre><p>Use lxappearance to manage themes:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S lxappearance
+</code></pre><p>To apply a theme for every user, add these <a href="https://wiki.archlinux.org/index.php/Environment_variables" target="_blank">environmental variables</a>
+ to /etc/environment:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">GTK_THEME=Arc-Dark
+QT_QPA_PLATFORMTHEME=gtk2
+</code></pre></div><h2 id="configuring-the-touchpad">Configuring the touchpad</h2>
+<p>To enable tap-to-click and natural scrolling, create a file, called 30-touchpad.conf at /etc/X11/xorg.conf.d/ with the following lines:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Section &#34;InputClass&#34;
+    Identifier &#34;touchpad&#34;
+    Driver &#34;libinput&#34;
+    MatchIsTouchpad &#34;on&#34;
+    Option &#34;Tapping&#34; &#34;on&#34;
+    Option &#34;NaturalScrolling&#34; &#34;true&#34;
+EndSection
+</code></pre></div><p>Restart the X server for the changes to take effect.</p>
+<h2 id="enabling-sound">Enabling sound</h2>
+<p>I&rsquo;m using the <a href="https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture" target="_blank">ALSA</a>
+ sound system on my machine. Install alsa-utils with the following command. This will provide a program called alsa-mixer which you can use to control sound.</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S alsa-utils
+</code></pre><p>I have media control buttons on my laptop (they can control for eg. switching to next/prev. song on Spotify). For these to work I&rsquo;m going to install playerctl.</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S playerctl
+</code></pre><p>I have alsamixer and playerctl commands binded to the volume level controlling and media controlling keys in my DWM config, thats how I make these keys functional.</p>
+
+</main>
+
+<div class="pagination__buttons">
+    
+    <span class="button previous">
+        <a href="http://example.org/arch-notes/installation/">
+            <span class="button__icon">←</span>
+            <span class="button__text">Installation</span>
+        </a>
+    </span>
+    
+
+    
+    <span class="button next">
+        <a href="http://example.org/arch-notes/other-software/">
+            <span class="button__text">Software setup</span>
+            <span class="button__icon">→</span>
+        </a>
+    </span>
+    
+</div>
+</div>
+
+<footer>
+    <div class="copyright">
+
+        <span>&copy; 2021</span>
+        <span><a href="http://example.org">László Szurok</a></span>
+        <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+
+    </div>
+    <p>The Source Code For This Site Can Be Found On GitHub</p>
+
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>repeater on bit-flip</title>
+    <link>http://example.org/tags/repeater/</link>
+    <description>Recent content in repeater on bit-flip</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 18 Aug 2020 22:04:44 +0200</lastBuildDate><atom:link href="http://example.org/tags/repeater/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Extend your home network</title>
+      <link>http://example.org/posts/wireless-router-repeater/</link>
+      <pubDate>Tue, 18 Aug 2020 22:04:44 +0200</pubDate>
+      
+      <guid>http://example.org/posts/wireless-router-repeater/</guid>
+      <description>A repeater is a device that is used to extend transmissions so that the signal can cover longer distances. If you want to extend the coverage of your wireless network, you can set up a secondary router to connect to your main router and act as a repeater. Nowadays most routers have this functionality built in. In this tutorial I&amp;rsquo;m going to show an example setup with a D-Link device as the repeater.</description>
+    </item>
+    
+  </channel>
+</rss>

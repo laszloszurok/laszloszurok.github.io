@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Installation | bit-flip</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/custom-style.css" />
+
+    </head>
+
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="/"><img src="/img/logo.png" alt="logo" id="logo-img" /></a>
+            </div>
+            <div class="menu">
+                <ul class="menu">
+                    
+                    <li><a href="/">Home</a></li>
+                    
+                    <li><a href="/arch-notes/">Arch-notes</a></li>
+                    
+                    <li><a href="/posts/">Posts</a></li>
+                    
+                    <li><a href="/contact/">Contact</a></li>
+                    
+                    <li><a href="/index.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Installation</span></h1>
+    
+    <h2 class="date">2020/07/03</h2>
+</div>
+
+
+    
+    <div id="TableOfContents"></div>
+
+<main>
+    <p>More info on the <a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank">wiki</a>
+.</p>
+<h2 id="setting-up-the-mirrorlist">Setting up the mirrorlist</h2>
+<p>For faster download speeds choose the appropriate mirrors based on your country. I&rsquo;m going to use vim to edit the <a href="https://wiki.archlinux.org/index.php/Mirrors" target="_blank">mirrorlist</a>
+ file.</p>
+<pre><code class="language-terminal" data-lang="terminal">vim /etc/pacman.d/mirrorlist
+</code></pre><p>Search for your country and move the lines to the top of the file (uncomment them). Save the file and exit the texteditor.</p>
+<h2 id="installing-the-base-system">Installing the base system</h2>
+<p>Install the necessary packages and a texteditor of your preference.</p>
+<pre><code class="language-terminal" data-lang="terminal">pacstrap /mnt base linux linux-firmware vim
+</code></pre>
+</main>
+
+<div class="pagination__buttons">
+    
+    <span class="button previous">
+        <a href="http://example.org/arch-notes/pre-installation/">
+            <span class="button__icon">←</span>
+            <span class="button__text">Pre-Installation</span>
+        </a>
+    </span>
+    
+
+    
+    <span class="button next">
+        <a href="http://example.org/arch-notes/post-installation/">
+            <span class="button__text">Post-Installation</span>
+            <span class="button__icon">→</span>
+        </a>
+    </span>
+    
+</div>
+</div>
+
+<footer>
+    <div class="copyright">
+
+        <span>&copy; 2021</span>
+        <span><a href="http://example.org">László Szurok</a></span>
+        <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+
+    </div>
+    <p>The Source Code For This Site Can Be Found On GitHub</p>
+
+</footer>
+</body>
+</html>
+

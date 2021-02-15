@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Software setup | bit-flip</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/custom-style.css" />
+
+    </head>
+
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="/"><img src="/img/logo.png" alt="logo" id="logo-img" /></a>
+            </div>
+            <div class="menu">
+                <ul class="menu">
+                    
+                    <li><a href="/">Home</a></li>
+                    
+                    <li><a href="/arch-notes/">Arch-notes</a></li>
+                    
+                    <li><a href="/posts/">Posts</a></li>
+                    
+                    <li><a href="/contact/">Contact</a></li>
+                    
+                    <li><a href="/index.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Software setup</span></h1>
+    
+    <h2 class="date">2020/05/09</h2>
+</div>
+
+
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#zsh">zsh</a></li>
+    <li><a href="#zoxide">Zoxide</a></li>
+    <li><a href="#neovim">Neovim</a></li>
+    <li><a href="#vifm">Vifm</a></li>
+    <li><a href="#spotify">Spotify</a></li>
+    <li><a href="#vscodium">VSCodium</a></li>
+  </ul>
+</nav>
+
+
+<main>
+    <h2 id="zsh">zsh</h2>
+<p>Install <a href="https://wiki.archlinux.org/index.php/zsh" target="_blank">zsh</a>
+:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S zsh
+</code></pre><p>Change the shell for the current user:</p>
+<pre><code class="language-terminal" data-lang="terminal">chsh -s /usr/bin/zsh
+</code></pre><h2 id="zoxide">Zoxide</h2>
+<p><a href="https://github.com/ajeetdsouza/zoxide" target="_blank">Zoxide</a>
+ will make your life easier on the command line. Installation:</p>
+<pre><code class="language-terminal" data-lang="terminal">paru -S zoxide-bin
+</code></pre><p>Add this to your zshrc:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>zoxide init zsh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>Use it like this:</p>
+<pre><code class="language-terminal" data-lang="terminal">cd grandparent-folder/parent-folder/child-folder
+</code></pre><pre><code class="language-terminal" data-lang="terminal">cd different/path/to/another/folder
+</code></pre><pre><code class="language-terminal" data-lang="terminal">z child-folder
+</code></pre><p>The last command will take you back directly inside the directory called child-folder. Zoxide automatically updates itself as you use it, so it will always know the path of the folders you visited. Makes it much faster to move around in the filesystem.</p>
+<h2 id="neovim">Neovim</h2>
+<p><a href="https://neovim.io/" target="_blank">Neovim</a>
+ is a highly extensible refactor of Vim.</p>
+<p>To automatically install <a href="https://github.com/junegunn/vim-plug" target="_blank">vim-plug</a>
+, add this to your init.vim file and restart the editor:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">if</span> ! <span style="color:#a6e22e">filereadable</span>(<span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#39;~/.config/nvim/autoload/plug.vim&#39;</span>))<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#a6e22e">echo</span> <span style="color:#e6db74">&#34;Downloading junegunn/vim-plug to manage plugins...&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#a6e22e">silent</span> !<span style="color:#a6e22e">mkdir</span> -<span style="color:#a6e22e">p</span> ~<span style="color:#e6db74">/.config/</span><span style="color:#a6e22e">nvim</span><span style="color:#e6db74">/autoload/</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#a6e22e">silent</span> !<span style="color:#a6e22e">curl</span> <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim&#34;</span> &gt; ~<span style="color:#e6db74">/.config/</span><span style="color:#a6e22e">nvim</span><span style="color:#e6db74">/autoload/</span><span style="color:#a6e22e">plug</span>.<span style="color:#a6e22e">vim</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">VimEnter</span> * <span style="color:#a6e22e">PlugInstall</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>To make the usage of vim or nvim more comfortable, I recommend swapping the CapsLock and Esapce keys functionality, as CapsLock is kind of a useless key, but in an easily reachable
+position on the keyboard, while Escape is used fairly often if you use vim bindings. To make this happen, autostart the following command (eg. with .xinitrc):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">setxkbmap -option <span style="color:#e6db74">&#39;caps:swapescape&#39;</span>
+</code></pre></div><h2 id="vifm">Vifm</h2>
+<p><a href="https://wiki.archlinux.org/index.php/Vifm" target="_blank">Vifm</a>
+ is a terminal file manager. It uses vim like keybindings.
+To apply <a href="https://vifm.info/colorschemes.shtml" target="_blank">color schemes</a>
+, download and place it inside .config/vifm/colors/ . Then open .config/vifm/vifmrc and add this line
+(replace themename):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">colorscheme</span> <span style="color:#a6e22e">themename</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>By default vifm won&rsquo;t show image previews. To make that work, you need to add the following configuration to vifmrc:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">fileviewer</span> *.<span style="color:#a6e22e">pdf</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">pdfpreview</span> %<span style="color:#a6e22e">px</span> %<span style="color:#a6e22e">py</span> %<span style="color:#a6e22e">pw</span> %<span style="color:#a6e22e">ph</span> %<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ %<span style="color:#a6e22e">pc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">clear</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">fileviewer</span> *.<span style="color:#a6e22e">epub</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">epubpreview</span> %<span style="color:#a6e22e">px</span> %<span style="color:#a6e22e">py</span> %<span style="color:#a6e22e">pw</span> %<span style="color:#a6e22e">ph</span> %<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ %<span style="color:#a6e22e">pc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">clear</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">fileviewer</span> *.<span style="color:#a6e22e">avi</span>,*.<span style="color:#a6e22e">mp4</span>,*.<span style="color:#a6e22e">wmv</span>,*.<span style="color:#a6e22e">dat</span>,*.<span style="color:#ae81ff">3</span>gp,*.<span style="color:#a6e22e">ogv</span>,*.<span style="color:#a6e22e">mkv</span>,*.<span style="color:#a6e22e">mpg</span>,*.<span style="color:#a6e22e">mpeg</span>,*.<span style="color:#a6e22e">vob</span>,<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \*.<span style="color:#a6e22e">fl</span>[<span style="color:#a6e22e">icv</span>],*.<span style="color:#a6e22e">m2v</span>,*.<span style="color:#a6e22e">mov</span>,*.<span style="color:#a6e22e">webm</span>,*.<span style="color:#a6e22e">ts</span>,*.<span style="color:#a6e22e">mts</span>,*.<span style="color:#a6e22e">m4v</span>,*.<span style="color:#a6e22e">r</span>[<span style="color:#a6e22e">am</span>],*.<span style="color:#a6e22e">qt</span>,*.<span style="color:#a6e22e">divx</span>,<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">videopreview</span> %<span style="color:#a6e22e">px</span> %<span style="color:#a6e22e">py</span> %<span style="color:#a6e22e">pw</span> %<span style="color:#a6e22e">ph</span> %<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ %<span style="color:#a6e22e">pc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">clear</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">fileviewer</span> *.<span style="color:#a6e22e">bmp</span>,*.<span style="color:#a6e22e">jpg</span>,*.<span style="color:#a6e22e">jpeg</span>,*.<span style="color:#a6e22e">png</span>,*.<span style="color:#a6e22e">xpm</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">draw</span> %<span style="color:#a6e22e">px</span> %<span style="color:#a6e22e">py</span> %<span style="color:#a6e22e">pw</span> %<span style="color:#a6e22e">ph</span> %<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ %<span style="color:#a6e22e">pc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">clear</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">fileviewer</span> *.<span style="color:#a6e22e">gif</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">gifpreview</span> %<span style="color:#a6e22e">px</span> %<span style="color:#a6e22e">py</span> %<span style="color:#a6e22e">pw</span> %<span style="color:#a6e22e">ph</span> %<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ %<span style="color:#a6e22e">pc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">clear</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">fileviewer</span> *.<span style="color:#a6e22e">ico</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">magickpreview</span> %<span style="color:#a6e22e">px</span> %<span style="color:#a6e22e">py</span> %<span style="color:#a6e22e">pw</span> %<span style="color:#a6e22e">ph</span> %<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ %<span style="color:#a6e22e">pc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">clear</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">fileviewer</span> &lt;<span style="color:#a6e22e">audio</span>/*&gt;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">audiopreview</span> %<span style="color:#a6e22e">px</span> %<span style="color:#a6e22e">py</span> %<span style="color:#a6e22e">pw</span> %<span style="color:#a6e22e">ph</span> %<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ %<span style="color:#a6e22e">pc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">clear</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">fileviewer</span> &lt;<span style="color:#a6e22e">font</span>/*&gt;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">fontpreview</span> %<span style="color:#a6e22e">px</span> %<span style="color:#a6e22e">py</span> %<span style="color:#a6e22e">pw</span> %<span style="color:#a6e22e">ph</span> %<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ %<span style="color:#a6e22e">pc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#a6e22e">vifmimg</span> <span style="color:#a6e22e">clear</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>Then clone this repo: <a href="https://github.com/cirala/vifmimg" target="_blank">https://github.com/cirala/vifmimg</a>
+ and place the vifmimg and vifmrun scripts in a folder that is included in your $PATH variable.
+From now on, you have to launch vifm with the vifmrun script to have image-, pdf-, video thumbnail-, etc. previews.</p>
+<h2 id="spotify">Spotify</h2>
+<p>I have a workspace deticated to Spotify in my DWM build. By default Spotify is not following the rules specified in DWM&rsquo;s config.h file, so the window won&rsquo;t be moved to the right workspace when you launch the program. Here&rsquo;s the fix for this problem:</p>
+<p>Install a little program called spotifywm. This will help us to give Spotify a classname when it starts up, so DWM will be able to apply the rules to the Spotify window.</p>
+<pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/dasJ/spotifywm.git
+</code></pre><pre><code class="language-terminal" data-lang="terminal">cd spotifywm
+</code></pre><pre><code class="language-terminal" data-lang="terminal">make
+</code></pre><p>The make command will build a binary file called spotifywm.so.</p>
+<p>Now create a file called spotify under this location: /usr/local/bin/ with the following content:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">LD_PRELOAD=/usr/lib/libcurl.so.4:/home/&lt;USERNAME&gt;/spotifywm/spotifywm.so /usr/bin/spotify
+</code></pre></div><p>Replace &lt;USERNAME&gt; with your username, then save the file and make it executable. Now if you launch Spotify it should open on the workspace it&rsquo;s assigned to.</p>
+<h2 id="vscodium">VSCodium</h2>
+<p><a href="https://vscodium.com/" target="_blank">VSCodium</a>
+ is the community driven, free-licensed version of VSCode (no Microsoft telemetry/tracking).</p>
+<p>If you want to use vim keybindings with this editor, you have to install an extention called VSCodeVim. To be able to use the CapsLock key as Escape, like with Neovim, add the following line to your settings.json:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">{
+    ... ,
+
+    &#34;keyboard.dispatch&#34;: &#34;keyCode&#34;,
+
+    ...
+}
+</code></pre></div>
+</main>
+
+<div class="pagination__buttons">
+    
+    <span class="button previous">
+        <a href="http://example.org/arch-notes/post-installation/">
+            <span class="button__icon">←</span>
+            <span class="button__text">Post-Installation</span>
+        </a>
+    </span>
+    
+
+    
+    <span class="button next">
+        <a href="http://example.org/arch-notes/screenshots/">
+            <span class="button__text">Screenshots</span>
+            <span class="button__icon">→</span>
+        </a>
+    </span>
+    
+</div>
+</div>
+
+<footer>
+    <div class="copyright">
+
+        <span>&copy; 2021</span>
+        <span><a href="http://example.org">László Szurok</a></span>
+        <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+
+    </div>
+    <p>The Source Code For This Site Can Be Found On GitHub</p>
+
+</footer>
+</body>
+</html>
+

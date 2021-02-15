@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on bit-flip</title>
+    <link>http://example.org/</link>
+    <description>Recent content in Home on bit-flip</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 18 Aug 2020 22:04:44 +0200</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Extend your home network</title>
+      <link>http://example.org/posts/wireless-router-repeater/</link>
+      <pubDate>Tue, 18 Aug 2020 22:04:44 +0200</pubDate>
+      
+      <guid>http://example.org/posts/wireless-router-repeater/</guid>
+      <description>A repeater is a device that is used to extend transmissions so that the signal can cover longer distances. If you want to extend the coverage of your wireless network, you can set up a secondary router to connect to your main router and act as a repeater. Nowadays most routers have this functionality built in. In this tutorial I&amp;rsquo;m going to show an example setup with a D-Link device as the repeater.</description>
+    </item>
+    
+    <item>
+      <title>How to customize dwm</title>
+      <link>http://example.org/posts/dwm-rice/</link>
+      <pubDate>Mon, 20 Jul 2020 17:28:04 +0200</pubDate>
+      
+      <guid>http://example.org/posts/dwm-rice/</guid>
+      <description>This tutorial will go over how to customize DWM. I&amp;rsquo;m going to use my own DWM build as an example. This post was made for a request from a Reddit user after I posted an image of my Arch linux setup in r/unixporn.</description>
+    </item>
+    
+    <item>
+      <title>Pre-Installation</title>
+      <link>http://example.org/arch-notes/pre-installation/</link>
+      <pubDate>Sat, 04 Jul 2020 17:09:50 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/pre-installation/</guid>
+      <description>Contents of this post: Settings and configurations to prepare the installation. (internet, time and date, partitioning, etc.)</description>
+    </item>
+    
+    <item>
+      <title>Installation</title>
+      <link>http://example.org/arch-notes/installation/</link>
+      <pubDate>Fri, 03 Jul 2020 10:12:02 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/installation/</guid>
+      <description>Contents of this post: Setting up the mirrorlist, Installing the base system</description>
+    </item>
+    
+    <item>
+      <title>Post-Installation</title>
+      <link>http://example.org/arch-notes/post-installation/</link>
+      <pubDate>Thu, 02 Jul 2020 10:14:55 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/post-installation/</guid>
+      <description>Contents of this post: Various settings and configurations after the installation. (timezone, network, user account, etc.)</description>
+    </item>
+    
+    <item>
+      <title>Software setup</title>
+      <link>http://example.org/arch-notes/other-software/</link>
+      <pubDate>Sat, 09 May 2020 18:32:02 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/other-software/</guid>
+      <description>Contents of this post: Settings and configurations for my most used programs (z, zsh, vifm, pywal, etc.)</description>
+    </item>
+    
+    <item>
+      <title>Screenshots</title>
+      <link>http://example.org/arch-notes/screenshots/</link>
+      <pubDate>Tue, 14 Apr 2020 20:48:38 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/screenshots/</guid>
+      <description>Contents of this post: Screenshots of my installed system and programs.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://example.org/contact/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/contact/contact/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

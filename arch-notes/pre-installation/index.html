@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Pre-Installation | bit-flip</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/custom-style.css" />
+
+    </head>
+
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="/"><img src="/img/logo.png" alt="logo" id="logo-img" /></a>
+            </div>
+            <div class="menu">
+                <ul class="menu">
+                    
+                    <li><a href="/">Home</a></li>
+                    
+                    <li><a href="/arch-notes/">Arch-notes</a></li>
+                    
+                    <li><a href="/posts/">Posts</a></li>
+                    
+                    <li><a href="/contact/">Contact</a></li>
+                    
+                    <li><a href="/index.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Pre-Installation</span></h1>
+    
+    <h2 class="date">2020/07/04</h2>
+</div>
+
+
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#connecting-to-the-internet">Connecting to the internet</a></li>
+    <li><a href="#time-and-date">Time and date</a></li>
+    <li><a href="#partitioning-the-disk">Partitioning the disk</a></li>
+    <li><a href="#creating-filesystems">Creating filesystems</a></li>
+    <li><a href="#mounting-the-partitons">Mounting the partitons</a></li>
+  </ul>
+</nav>
+
+
+<main>
+    <h2 id="connecting-to-the-internet">Connecting to the internet</h2>
+<p>List network interfaces:</p>
+<pre><code class="language-terminal" data-lang="terminal">ip link
+</code></pre><p>For wireless connection authenticate to the network using <a href="https://wiki.archlinux.org/index.php/Iwd#iwctl" target="_blank">iwctl</a>
+:</p>
+<pre><code class="language-terminal" data-lang="terminal">iwctl
+</code></pre><p>In the iwctl prompt, list all Wi-Fi devices:</p>
+<pre><code>[iwd]# device list
+</code></pre><p>Scan for networks (replace <em>device</em> with a device name):</p>
+<pre><code>[iwd]# station device scan
+</code></pre><p>List available networks (replace <em>device</em> with a device name):</p>
+<pre><code>[iwd]# station device get-networks
+</code></pre><p>Connect to a network (replace <em>device</em> and <em>SSID</em> with the appropriate values):</p>
+<pre><code>[iwd]# station device connect SSID
+</code></pre><p>To share a phone&rsquo;s internet connection through Wi-Fi, launch <a href="https://wiki.archlinux.org/index.php/Dhcpcd" target="_blank">dhcpcd</a>
+, then connect the phone and start tethering.</p>
+<pre><code class="language-terminal" data-lang="terminal">dhcpcd 
+</code></pre><p>Test the connection with the following command:</p>
+<pre><code class="language-terminal" data-lang="terminal">ping archlinux.org
+</code></pre><h2 id="time-and-date">Time and date</h2>
+<p>Update the system clock with <a href="https://wiki.archlinux.org/index.php/System_time#System_clock" target="_blank">timedatectl</a>
+.</p>
+<pre><code class="language-terminal" data-lang="terminal">timedatectl set-ntp true
+</code></pre><h2 id="partitioning-the-disk">Partitioning the disk</h2>
+<p>Use <a href="https://wiki.archlinux.org/index.php/Fdisk" target="_blank">fdisk</a>
+ to create partitions. Use <a href="https://wiki.archlinux.org/index.php/Device_file" target="_blank">lsblk</a>
+ to get the appropriate device names. (eg. /dev/sda)</p>
+<pre><code class="language-terminal" data-lang="terminal">fdisk /path/to/device
+</code></pre><p>For UEFI:</p>
+<ol>
+<li><strong>g</strong> - for a new GUID Partition Table</li>
+<li><strong>n</strong> - for the efi partition, partition number: default, first sector: default, last sector: +512M</li>
+<li><strong>n</strong> - for a swap partition (optional), partition number: default, first sector: default, last sector: +8G (in my case)</li>
+<li><strong>n</strong> - for the root partition, partition number: default, first sector: default, last sector: default</li>
+<li><strong>w</strong> - to write the changes on the disk</li>
+</ol>
+<p>For MBR:</p>
+<ol>
+<li><strong>o</strong> - for a new DOS Partition Table</li>
+<li><strong>n</strong> - for a swap partition (optional), partition number: default, first sector: default, last sector: +8G (in my case)</li>
+<li><strong>n</strong> - for the root partition, partition number: default, first sector: default, last sector: default</li>
+<li><strong>w</strong> - to write the changes on the disk</li>
+</ol>
+<h2 id="creating-filesystems">Creating filesystems</h2>
+<p>Use the partition names in the paths (eg. mkfs.ext4 /dev/sda3)</p>
+<p>If you created an efi partition:</p>
+<pre><code class="language-terminal" data-lang="terminal">mkfs.fat -F32 /path/to/efi/partition
+</code></pre><p>If you created a swap partition:</p>
+<pre><code class="language-terminal" data-lang="terminal">mkswap /path/to/swap/partition
+</code></pre><p>For the root partition:</p>
+<pre><code class="language-terminal" data-lang="terminal">mkfs.ext4 /path/to/root/partiton
+</code></pre><h2 id="mounting-the-partitons">Mounting the partitons</h2>
+<p>Attach the created partitions to the existing filesystem.</p>
+<p>First the root partition:</p>
+<pre><code class="language-terminal" data-lang="terminal">mount /path/to/root/partition /mnt
+</code></pre><p>If you created an efi partiton:</p>
+<pre><code class="language-terminal" data-lang="terminal">mkdir /mnt/boot
+</code></pre><pre><code class="language-terminal" data-lang="terminal">mkdir /mnt/boot/EFI
+</code></pre><pre><code class="language-terminal" data-lang="terminal">mount /path/to/efi/partition /mnt/boot/EFI
+</code></pre><p>If you created a swap partiton:</p>
+<pre><code class="language-terminal" data-lang="terminal">swapon /path/to/swap/partition
+</code></pre>
+</main>
+
+<div class="pagination__buttons">
+    
+
+    
+    <span class="button next">
+        <a href="http://example.org/arch-notes/installation/">
+            <span class="button__text">Installation</span>
+            <span class="button__icon">→</span>
+        </a>
+    </span>
+    
+</div>
+</div>
+
+<footer>
+    <div class="copyright">
+
+        <span>&copy; 2021</span>
+        <span><a href="http://example.org">László Szurok</a></span>
+        <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+
+    </div>
+    <p>The Source Code For This Site Can Be Found On GitHub</p>
+
+</footer>
+</body>
+</html>
+

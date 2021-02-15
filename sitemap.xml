@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://example.org/posts/wireless-router-repeater/</loc>
+    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/</loc>
+    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/posts/</loc>
+    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/repeater/</loc>
+    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/router/</loc>
+    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/</loc>
+    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/wireless/</loc>
+    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/dwm/</loc>
+    <lastmod>2020-07-20T17:28:04+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/posts/dwm-rice/</loc>
+    <lastmod>2020-07-20T17:28:04+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/rice/</loc>
+    <lastmod>2020-07-20T17:28:04+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/tutorial/</loc>
+    <lastmod>2020-07-20T17:28:04+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/arch/</loc>
+    <lastmod>2020-07-04T17:09:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/arch-notes/</loc>
+    <lastmod>2020-07-04T17:09:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/pre-install/</loc>
+    <lastmod>2020-07-04T17:09:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/arch-notes/pre-installation/</loc>
+    <lastmod>2020-07-04T17:09:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/arch-notes/installation/</loc>
+    <lastmod>2020-07-03T10:12:02+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/installation/</loc>
+    <lastmod>2020-07-03T10:12:02+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/post-install/</loc>
+    <lastmod>2020-07-02T10:14:55+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/arch-notes/post-installation/</loc>
+    <lastmod>2020-07-02T10:14:55+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/setup/</loc>
+    <lastmod>2020-05-09T18:32:02+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/software/</loc>
+    <lastmod>2020-05-09T18:32:02+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/arch-notes/other-software/</loc>
+    <lastmod>2020-05-09T18:32:02+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/arch-notes/screenshots/</loc>
+    <lastmod>2020-04-14T20:48:38+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/contact/contact/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/contact/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>How to customize dwm | bit-flip</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/custom-style.css" />
+
+    </head>
+
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="/"><img src="/img/logo.png" alt="logo" id="logo-img" /></a>
+            </div>
+            <div class="menu">
+                <ul class="menu">
+                    
+                    <li><a href="/">Home</a></li>
+                    
+                    <li><a href="/arch-notes/">Arch-notes</a></li>
+                    
+                    <li><a href="/posts/">Posts</a></li>
+                    
+                    <li><a href="/contact/">Contact</a></li>
+                    
+                    <li><a href="/index.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+<div class="article-meta">
+    <h1><span class="title">How to customize dwm</span></h1>
+    
+    <h2 class="date">2020/07/20</h2>
+</div>
+
+
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#about-dwm">About DWM</a></li>
+    <li><a href="#get-the-source-code">Get the source code</a></li>
+    <li><a href="#pre-configuration">Pre-configuration</a></li>
+    <li><a href="#patching">Patching</a></li>
+    <li><a href="#restart-dwm-in-place">Restart dwm in place</a></li>
+    <li><a href="#customizing-the-tag-indicators">Customizing the tag indicators</a></li>
+    <li><a href="#font-awesome">Font Awesome</a></li>
+    <li><a href="#statusbar-padding">Statusbar padding</a></li>
+    <li><a href="#an-awesome-bar">An awesome bar</a></li>
+    <li><a href="#status-indicators-with-dwmblocks">Status indicators with dwmblocks</a></li>
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#gaps">Gaps</a></li>
+  </ul>
+</nav>
+
+
+<main>
+    <p>This tutorial will go over how to customize DWM. I&rsquo;m going to use my own DWM build as an example. If you want to see the final looks of the setup
+I&rsquo;m going to build here, you can check it out <a href="/arch-notes/screenshots" target="_blank">here</a>
+.</p>
+<p>This post was made for a request from a Reddit user after I posted an image of my Arch linux setup in <a href="https://www.reddit.com/r/unixporn/" target="_blank">r/unixporn</a>
+.</p>
+<h2 id="about-dwm">About DWM</h2>
+<p>DWM stands for Dynamic Window Manager. As the name suggests it manages windows in a graphical enviroment. It supports different layouts, like tiled, stacked, etc.
+DWM is written in C and it is very lightweight. Many users love it for it&rsquo;s simplicity, but it is not the best choice for someone who is not familiar
+with window managers, as it does not have a separate documentation or user guide. The code itself serves as the documentation. This does not mean you have to be
+an expert in C to use DWM, but knowing a bit about the languege will defenetly help to customize the WM to your needs.</p>
+<h2 id="get-the-source-code">Get the source code</h2>
+<p>Clone the source code of DWM with the following command:</p>
+<pre><code class="language-terminal" data-lang="terminal">git clone https://git.suckless.org/dwm
+</code></pre><h2 id="pre-configuration">Pre-configuration</h2>
+<p>After you got the sources, you are going to see a file, called config.def.h in the dwm directory. This file contains some basic configuration which you can change, like
+keybindings, color values, etc.</p>
+<p>By default if you compile dwm, that will generate a file called config.h, with the exact same content as config.def.h. If you then want
+to modify something, you have to edit the config.h file. This is not too sustainable as some patches (extra functionality that you can add to dwm) will modify the
+config.def.h file, so you would have to manually copy the changes to config.h.</p>
+<p>The best solution is only modifying config.def.h and removing config.h after evrey new
+build (as it is generated automatically every time). To remove config.h automatically, you can modify the Makefile. Open the file and locate the following part:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
+	rm -f dwm <span style="color:#e6db74">${</span>OBJ<span style="color:#e6db74">}</span> dwm-<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>.tar.gz
+</code></pre></div><p>Add config.h to the end of the line after the rm command like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
+	rm -f dwm <span style="color:#e6db74">${</span>OBJ<span style="color:#e6db74">}</span> dwm-<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>.tar.gz config.h
+</code></pre></div><p>So from now on you only have to deal with the config.def.h file and you can use the &lsquo;sudo make clean install&rsquo; command to build dwm, as you normally would.
+(The config.h file still will be generated, but you don&rsquo;t have to remove it anymore. Just leave it there and make your configurations in config.def.h)</p>
+<h2 id="patching">Patching</h2>
+<p>DWM in itself can display your windows and statusbar, supports different layouts but it is not full of features. You may want to use a different layout, or you want to add
+other functionality like autostarting programs when dwm starts up. You can extend dwm with patches. You can find a lot of them on the <a href="https://dwm.suckless.org/patches/" target="_blank">official site</a>
+.
+You can apply a patch with the &lsquo;patch&rsquo; command like this (in the dwm directory):</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo patch -p1 &lt; path/to/the/diff/file
+</code></pre><p>A patch is a file that contains the differences between the state of a file before and after the patch is applied. In the case of dwm, a patch usually modifies the config.def.h
+or the dwm.c file.</p>
+<p>Automatic patching won&rsquo;t always work. Let&rsquo;s take a look at the following example:</p>
+<p>Assume we have the following lines in a theoretical diff file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">diff --git a/config.def.h b/config.def.h
+index 1c0b587..b67825e 100644
+<span style="color:#f92672">--- a/config.def.h
+</span><span style="color:#f92672"></span><span style="color:#a6e22e">+++ b/config.def.h
+</span><span style="color:#a6e22e"></span><span style="color:#f92672">- int some_variable = 0;
+</span><span style="color:#f92672"></span><span style="color:#a6e22e">+ int some_variable = 1;
+</span></code></pre></div><p>This part is telling us which file is being modified by the patch:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">diff --git a/config.def.h b/config.def.h
+index 1c0b587..b67825e 100644
+<span style="color:#f92672">--- a/config.def.h
+</span><span style="color:#f92672"></span><span style="color:#a6e22e">+++ b/config.def.h
+</span></code></pre></div><p>In this case it&rsquo;s config.def.h.</p>
+<p>Then the red line starting with a single &lsquo;-&rsquo; symbol shows the state of the file before the patch is applied. So the patch assumes that in the original state of config.def.h
+the value of <em>&lsquo;some_variable&rsquo;</em> is 0. The green line starting with a single &lsquo;+&rsquo; symbol shows the state of the file after the patch. So basicly the red line is removed, the green
+line is added.</p>
+<p>What if we apply multiple patches and some of them want to modify the same lines? If a patch is looking for this line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> some_variable <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</code></pre></div><p>but an other patch changed/removed that line, then the patch will fail. The error message will show us what happend and we will have two new files: config.def.rej and config.def.orig.</p>
+<p>The config.def.rej will contain the part of the patch that failed. You have to apply those changes manually. In this case you would have to open config.def.h, locate the part
+where the patch failed and add the missing lines from config.def.h.rej. Usually the diff files show the untouched lines surrounding the changes, so you can locate the modified
+parts based on those lines.</p>
+<p>I recommend creating a directory called patches to separate the diff files inside the dwm directory, so it&rsquo;s a bit easier to follow what files you have and what patches you
+applied.</p>
+<h2 id="restart-dwm-in-place">Restart dwm in place</h2>
+<p>The first patch I&rsquo;m going to apply is called <a href="https://dwm.suckless.org/patches/restartsig/" target="_blank">dwm-restartsig</a>
+. This makes it possible to restart dwm &lsquo;in place&rsquo;.
+What I mean by this is you do not have to restart your X session by killing the X server, you can just refresh dwm, so for e.g. if you make some changes in your status bar,
+you can see the changes instantly after the refresh. Use the patch command to apply pathces like this:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo patch -p1 &lt; dwm-restartsig-20180523-6.2.diff
+</code></pre><p>After you have the restartsig patch, rebuild dwm. You have to restart it manually now, but after that, you can use the Mod+ctrl+shift+q keycombination to refresh dwm without killing X.</p>
+<h2 id="customizing-the-tag-indicators">Customizing the tag indicators</h2>
+<p>The <a href="https://dwm.suckless.org/patches/activetagindicatorbar/" target="_blank">activetagindicatorbar</a>
+ patch draws a little bar above the tag numbers instead of a square.
+I just think it looks better and I&rsquo;m also gonna customize it. Apply the patch in the exact same way as I showed above. Refresh dwm to see the changes.</p>
+<p>I want to make the indicator bars a little smaller and I want them to be always filled. Open up dwm.c and locate the following part:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">if</span> (occ <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i)
+	drw_rect(drw, x <span style="color:#f92672">+</span> boxw, <span style="color:#ae81ff">0</span>, w <span style="color:#f92672">-</span> ( <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> boxw <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), boxw,
+		m <span style="color:#f92672">==</span> selmon <span style="color:#f92672">&amp;&amp;</span> selmon<span style="color:#f92672">-&gt;</span>sel <span style="color:#f92672">&amp;&amp;</span> selmon<span style="color:#f92672">-&gt;</span>sel<span style="color:#f92672">-&gt;</span>tags <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i,
+		urg <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i);
+</code></pre></div><p>Here are my changes (you can also make these changes in the diff file and patch afterwards, if you dont want to search in dwm.c):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">if</span> (occ <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i)
+	drw_rect(drw, x <span style="color:#f92672">+</span> boxw, <span style="color:#ae81ff">0</span>, w <span style="color:#f92672">-</span> ( <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> boxw <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), boxw<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#75715e">// box/2+1 is the height
+</span><span style="color:#75715e"></span>		<span style="color:#ae81ff">1</span>, <span style="color:#75715e">// 1 means draw a filled rect, 0 means draw only the border
+</span><span style="color:#75715e"></span>		urg <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i);
+</code></pre></div><h2 id="font-awesome">Font Awesome</h2>
+<p>In my build, I&rsquo;m using Font Awesome icons in the statusbar. Here is a <a href="https://fontawesome.com/cheatsheet/free/solid" target="_blank">cheat sheet</a>
+ where you can copy the icons from. To be able to display Font Awesome
+icons in your statusbar, or anywhere else on you system, you need to install the Font Awsome package for your operating system.
+On Arch linux the following command installs the font:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo pacman -S ttf-font-awesome
+</code></pre><p>You may have to reboot your computer to be able to see the icons once you copy them from the cheat sheet.</p>
+<p>Let&rsquo;s try it out. Open config.def.h and locate the fonts[] array:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>fonts[] <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;monospace:size=10&#34;</span> };
+</code></pre></div><p>Add Font Awesome to the array like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>fonts[] <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;FontAwesome:size=12&#34;</span>, <span style="color:#e6db74">&#34;monospace:size=10&#34;</span> };
+</code></pre></div><p>Now locate the tags[] array:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>tags[] <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#e6db74">&#34;2&#34;</span>, <span style="color:#e6db74">&#34;3&#34;</span>, <span style="color:#e6db74">&#34;4&#34;</span>, <span style="color:#e6db74">&#34;5&#34;</span>, <span style="color:#e6db74">&#34;6&#34;</span>,  <span style="color:#e6db74">&#34;7&#34;</span>, <span style="color:#e6db74">&#34;8&#34;</span>, <span style="color:#e6db74">&#34;9&#34;</span> };
+</code></pre></div><p>Copy some icons from the cheat sheet I linked previously and replace the numbers. After you&rsquo;re done, build and install dwm with the &lsquo;sudo make clean install&rsquo; command.
+Then restart dwm. Here&rsquo;s how my tags look like:</p>
+
+    <img src="/img/blog/dwm-rice/2020-07-20-192425_290x24_scrot.png"  alt="unixporn"  class="center"  style="border-radius: 4px;"  />
+
+
+<p>I have rules set up in config.def.h for some programs, so for e.g. Firefox will always open on the second workspace.</p>
+<h2 id="statusbar-padding">Statusbar padding</h2>
+<p>I have a little extra padding around my icons in the bar to make sure the window idicator does not cover them. To be able to set the padding apply the
+<a href="https://dwm.suckless.org/patches/statuspadding/" target="_blank">statuspadding</a>
+ patch. Then you will be able to set the padding in config.def.h like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> horizpadbar <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">/* horizontal padding for statusbar */</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> vertpadbar  <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>; <span style="color:#75715e">/* vertical padding for statusbar */</span>
+</code></pre></div><h2 id="an-awesome-bar">An awesome bar</h2>
+<p>To display the title of every window on the current tag, you can apply the <a href="https://dwm.suckless.org/patches/awesomebar/" target="_blank">awesomebar</a>
+ patch like this:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo patch -p1 &lt; dwm-awesomebar-20200907-6.2.diff
+</code></pre><h2 id="status-indicators-with-dwmblocks">Status indicators with dwmblocks</h2>
+<p>My status indicators will look like this:</p>
+
+    <img src="/img/blog/dwm-rice/status-indicators.png"  alt="unixporn"  class="center"  style="border-radius: 4px;"  />
+
+
+<p>The icons are clickable, for e.g if I click the wifi icon, a little dunst notification will pop up to tell me the signal strength and which network I&rsquo;m connected to.
+This functionality is achived by <a href="https://github.com/torrinfail/dwmblocks" target="_blank">dwmblocks</a>
+ and some patching. I&rsquo;ll cover it a bit later.</p>
+<p>Dwmblocks makes it possible to update the different indicators separately. This is much better
+than running every status indicator in one infinite loop and update them every 1 sec or something.</p>
+<p>With dwmblocks you can set different update intervals and update signals for each indicator. I can update the wifi indicator every 20 seconds and my clock every
+5 seconds.</p>
+<p>The keyboard layout indicator does not even have to be updated automatically. It only have to be updated if I switch keyboard layout. So I can just set an update
+signal for it, then I can write a script to kill and refresh the keyboard indicator when I switch the layout.</p>
+<p>This solution is easier on system resources as there&rsquo;s no unnecessary updates.</p>
+<p>Get the source code:</p>
+<pre><code class="language-terminal" data-lang="terminal">git clone https://github.com/torrinfail/dwmblocks.git
+</code></pre><p>Edit the blocks.h file to add your status indicators like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> Block blocks[] <span style="color:#f92672">=</span> {
+	<span style="color:#75715e">/*Icon*/</span>	<span style="color:#75715e">/*Command*/</span>		        <span style="color:#75715e">/*Update Interval*/</span>	   <span style="color:#75715e">/*Update Signal*/</span>
+    { <span style="color:#e6db74">&#34;  &#34;</span>,      <span style="color:#e6db74">&#34;~/scripts/status/wifinetwork&#34;</span>,  <span style="color:#ae81ff">20</span>,   <span style="color:#ae81ff">1</span> },
+    { <span style="color:#e6db74">&#34;   &#34;</span>,     <span style="color:#e6db74">&#34;~/scripts/status/cpu&#34;</span>,                 <span style="color:#ae81ff">5</span>,   <span style="color:#ae81ff">2</span> },
+    { <span style="color:#e6db74">&#34;   &#34;</span>,     <span style="color:#e6db74">&#34;~/scripts/status/memory&#34;</span>,            <span style="color:#ae81ff">5</span>,   <span style="color:#ae81ff">3</span> },
+};
+
+<span style="color:#75715e">//sets delimeter between status commands. NULL character (&#39;\0&#39;) means no delimeter.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">char</span> delim <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; &#39;</span>;
+</code></pre></div><p>I&rsquo;m using spaces in the Icons column to have some padding between the indicators. The actual icons are the output of my scripts.</p>
+<p>Now I&rsquo;ll cover the click functionality, as I promised:
+To be able to have clickable icons, we first have to apply the <a href="https://dwm.suckless.org/patches/statuscmd/" target="_blank">statuscmd-signal</a>
+ patch to dwm. Download and apply it with the patch command, just like with the previous patches.</p>
+<p>Then we have to apply the <a href="https://dwm.suckless.org/patches/statuscmd/" target="_blank">dwmblocks-statuscmd</a>
+ patch to dwmblocks.
+(This links to the same page as the statuscmd-signal dwm patch. They are on the same page, scroll down to find them. You can find three patches there, but we
+only need the statuscmd-signal for dwm and the dwmblocks-statucmd for dwmblocks).
+Download and apply it, then install dwmblocks.</p>
+<p>At last you have to autosart dwmblocks with your system. Put this line into your .xinitrc, before exec dwm, like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dwmblocks &amp;
+exec dwm
+</code></pre></div><p>Now you can write little status scripts and handle click events in them. Here is my wifi script as an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+icon<span style="color:#f92672">=</span><span class="inline-svg" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M634.91 154.88C457.74-8.99 182.19-8.93 5.09 154.88c-6.66 6.16-6.79 16.59-.35 22.98l34.24 33.97c6.14 6.1 16.02 6.23 22.4.38 145.92-133.68 371.3-133.71 517.25 0 6.38 5.85 16.26 5.71 22.4-.38l34.24-33.97c6.43-6.39 6.3-16.82-.36-22.98zM320 352c-35.35 0-64 28.65-64 64s28.65 64 64 64 64-28.65 64-64-28.65-64-64-64zm202.67-83.59c-115.26-101.93-290.21-101.82-405.34 0-6.9 6.1-7.12 16.69-.57 23.15l34.44 33.99c6 5.92 15.66 6.32 22.05.8 83.95-72.57 209.74-72.41 293.49 0 6.39 5.52 16.05 5.13 22.05-.8l34.44-33.99c6.56-6.46 6.33-17.06-.56-23.15z"/></svg>
+</span>
+
+essid<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>iwgetid wlo1 --raw<span style="color:#e6db74">`</span>
+signal<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>awk <span style="color:#e6db74">&#39;NR==3 {printf(&#34;%.0f%%&#34;,$3*10/7)}&#39;</span> /proc/net/wireless<span style="color:#e6db74">`</span>
+
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$essid<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    icon<span style="color:#f92672">=</span><span class="inline-svg" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm80 168c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32zM152 416c-26.5 0-48-21-48-47 0-20 28.5-60.4 41.6-77.8 3.2-4.3 9.6-4.3 12.8 0C171.5 308.6 200 349 200 369c0 26-21.5 47-48 47zm16-176c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm170.2 154.2C315.8 367.4 282.9 352 248 352c-21.2 0-21.2-32 0-32 44.4 0 86.3 19.6 114.7 53.8 13.8 16.4-11.2 36.5-24.5 20.4z"/></svg>
+</span>
+
+    essid<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;no wifi&#34;</span>
+    signal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+<span style="color:#66d9ef">fi</span>
+
+echo <span style="color:#e6db74">&#34;</span>$icon<span style="color:#e6db74">&#34;</span>
+
+<span style="color:#66d9ef">case</span> $BUTTON in
+    1<span style="color:#f92672">)</span> dunstify --replace<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#e6db74">&#34;</span>$essid<span style="color:#e6db74"> </span>$signal<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;Right click to open nmtui&#34;</span>;;
+    3<span style="color:#f92672">)</span> st -e nmtui &amp; disown;;
+<span style="color:#66d9ef">esac</span>
+</code></pre></div><p>Basicly the &lsquo;echo&rsquo; command displays the icon on the bar, which is either a little wifi icon or a sad face if there is no connection. The &lsquo;case $BUTTON&hellip;&rsquo; part handles the click events.
+The $BUTTON variable comes from the signal patches we applied to dwm and dwmblocks. Case 1) means a left click, case 3) means a right click. Case 2) would mean a click with the mouse
+wheel. Here the left click shows a little dunst notification with the essid and the signal strength of the current network, a right click opens up nmtui (a network management tool) in
+st (which is a terminal emulator).</p>
+<p>You can find all my status scripts <a href="https://github.com/laszloszurok/scripts/tree/master/status" target="_blank">here</a>
+.</p>
+<p>To kill and refresh a status indicator with a key combination you can have something like this in your config.def.h file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> Key keys[] <span style="color:#f92672">=</span> {
+    <span style="color:#75715e">/* modifier   key                    function        argument */</span>
+    ...
+    
+    { <span style="color:#ae81ff">0</span>,      XF86XK_AudioRaiseVolume,    spawn,     SHCMD(<span style="color:#e6db74">&#34;amixer sset Master 5%+ ; pkill -RTMIN+10 dwmblocks&#34;</span>) },
+    { <span style="color:#ae81ff">0</span>,      XF86XK_AudioLowerVolume,    spawn,     SHCMD(<span style="color:#e6db74">&#34;amixer sset Master 5%- ; pkill -RTMIN+10 dwmblocks&#34;</span>) },
+    
+    ...
+};
+</code></pre></div><p>If you want to display the curent volume level on the status bar, it will update when you raise or lover the volume with the built-in keys (I have these keys on my laptop).</p>
+<p>This part:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pkill -RTMIN+10 dwmblocks
+</code></pre></div><p>is the command which updates only the volume indicator. -RTMIN+10 means the indicator with the signal number of 10. (The number you set in dwmblocks/blocks.h)</p>
+<h2 id="colors">Colors</h2>
+<p>In dwm/config.def.h you can set your colors like this (assuming you have the awesomebar patch installed):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> norm_fg[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#e0dbd2&#34;</span>;
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> norm_bg[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#191b28&#34;</span>;
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> norm_border[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#333&#34;</span>;
+
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> sel_fg[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#e0dbd2&#34;</span>;
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> sel_bg[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#563d7c&#34;</span>;
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> sel_border[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#663d9c&#34;</span>;
+
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> not_sel_fg[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#e0dbd2&#34;</span>;
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> not_sel_bg[]  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#191b28&#34;</span>;
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> not_sel_border[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#333333&#34;</span>;
+
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> hid_fg[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#808080&#34;</span>;
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> hid_bg[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#191b28&#34;</span>;
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> hid_border[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#000&#34;</span>;
+
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>colors[][<span style="color:#ae81ff">3</span>]      <span style="color:#f92672">=</span> {
+    <span style="color:#75715e">/*                 fg          bg          border                         */</span>
+    [SchemeNorm]   <span style="color:#f92672">=</span> { norm_fg,    norm_bg,    norm_border }, 
+    [SchemeSel]    <span style="color:#f92672">=</span> { sel_fg,     sel_bg,     sel_border },  <span style="color:#75715e">// the focused win
+</span><span style="color:#75715e"></span>	[SchemeHid]    <span style="color:#f92672">=</span> { hid_fg,     hid_bg,     hid_border },
+    [SchemeNotSel] <span style="color:#f92672">=</span> { not_sel_fg, not_sel_bg, not_sel_border }  <span style="color:#75715e">// unfocused wins
+</span><span style="color:#75715e"></span>};
+</code></pre></div><h2 id="gaps">Gaps</h2>
+<p>I am using the <a href="https://dwm.suckless.org/patches/ru_gaps/" target="_blank">ru_gaps</a>
+ patch to have some space around the windows. Download, then apply it like this:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo patch -p1 &lt; dwm-ru_gaps-6.2.diff
+</code></pre><p>Then you can set the gapsize in config.def.h like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> gappx <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>; <span style="color:#75715e">/* gap pixel between windows */</span>
+</code></pre></div><p>That&rsquo;s all for now, happy ricing!</p>
+
+</main>
+
+<div class="pagination__buttons">
+    
+    <span class="button previous">
+        <a href="http://example.org/posts/wireless-router-repeater/">
+            <span class="button__icon">←</span>
+            <span class="button__text">Extend your home network</span>
+        </a>
+    </span>
+    
+
+    
+</div>
+</div>
+
+<footer>
+    <div class="copyright">
+
+        <span>&copy; 2021</span>
+        <span><a href="http://example.org">László Szurok</a></span>
+        <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+
+    </div>
+    <p>The Source Code For This Site Can Be Found On GitHub</p>
+
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,28 @@
+body { font-family: monospace, Candara, Calibri, Arial, sans-serif;
+}
+
+code {
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 85%;
+}
+
+.menu a { 
+    font-family: monospace;
+    font-weight: bold; 
+    font-size: 1.1em 
+}
+
+.title { font-size: 1.1em; }
+
+.banner { font-family: monospace; }
+
+.message { font-size: 1.1em; }
+
+.post-list {
+    font-family: monospace;
+    font-size: 1.2em;
+}
+
+footer { font-size: 0.9em; }
+
+main, .button { word-spacing: -0.2em; }

@@ -1,0 +1,320 @@
+:root {
+    --main-bg: #181a1b;
+    --main-fg: #e8e6e3;
+    --sec-bg: #151515;
+    --link-fg: #7c43bd;
+    --link-fg-hover: #9c03fd;
+}
+
+html { scroll-behavior: smooth; }
+
+/* giving some offset for anchors, so 
+ * the navbar won't cover them after 
+ * scrolling to them */
+:target:before {
+    content: "";
+    display: block;
+    height: 70px;
+    margin: -70px 0 0;
+}
+
+body {
+    max-width: 800px;
+    padding: 0 1em;
+    margin: auto;
+    background: var(--main-bg);
+    color: var(--main-fg);
+}
+
+/* links */
+a, a:visited, a:active { 
+    color: var(--link-fg);
+    text-decoration: underline;
+}
+
+a:hover {
+    color: var(--link-fg-hover);
+}
+
+.post-list a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* next/prev buttons at the end of posts */
+.pagination__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5em;
+}
+
+.button .previous, .button .next {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button a {
+    margin: 1em;
+    padding: 0.5em;
+    border-radius: 0.2em;
+    background: #333;
+    color: var(--main-fg);
+    text-decoration: none;
+}
+
+/* header and footer areas */
+nav {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 1em;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background: var(--main-bg);
+    z-index: 5;
+}
+
+#logo-img {
+    width: 11em;
+    padding-top: 0.6em;
+}
+
+.logo {
+    flex: 1;
+}
+
+.menu { 
+    flex: 3;
+    text-align: right;
+    text-transform: uppercase;
+    padding: 0;
+}
+
+.menu li { display: inline-block; }
+.article-meta, .menu a {
+    color: var(--main-fg);
+    text-decoration: none;
+    padding:0.7em 0.7em;
+    margin:0 0.3em 0.3em 0;
+    box-sizing: border-box;
+}
+
+.menu a:hover {
+    color: var(--link-fg);
+}
+
+.wrapper {
+    margin-top: 10em;
+    min-height: calc(100vh - 23.4em);
+}
+
+/* banner */
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5em;
+    padding-left: 3em;
+}
+
+.ascii {
+    flex: 2;
+    background: none;
+}
+
+.message {
+    flex: 3;
+    margin-left: -6em;
+    padding: 0 5em 0 2em;
+}
+
+footer {
+    background: #101010;
+    padding: 3em 0;
+    line-height: 2em;
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
+footer p {
+    margin: 0; !important
+    padding: 0; !important
+}
+
+.copyright > *:not(:last-child)::after {
+    content: "•";
+    margin: 0 0 0 0.6em;
+}
+
+.article-meta, footer { 
+    text-align: center;
+    margin-top: 5em;
+}
+
+footer a { text-decoration: none; }
+
+hr {
+    border-style: dashed;
+    color: #ddd;
+}
+
+/* misc elements */
+img, iframe, video { max-width: 100%; }
+
+main { 
+    hyphens: auto;
+    margin-top: -50vh;
+}
+
+main p { text-align: justify; }
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 5px solid #ccc;
+    padding: 3px 1em 3px;
+}
+
+table {
+    margin: auto;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+}
+
+table thead th { border-bottom: 1px solid #ddd; }
+
+th, td { padding: 5px; }
+
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+
+/* code blocks and terminal commands */
+pre {
+    padding: 1em;
+    background: var(--sec-bg);
+    border: none;
+    border-radius: 0.5em;
+    overflow-x: auto;
+}
+
+.language-terminal {
+    margin: 20px 0 20px -5px!important;
+}
+
+code.language-terminal::before {
+    content: '❯';
+    padding-right: 10px;
+    position: relative;
+    top: -1px;
+}
+
+.language-bash, .language-text, .language-c {
+    margin: 20px 0 20px 0!important;
+}
+
+/* style for the fontawesome shortcode */
+.inline-svg {
+  display: inline-block;
+  height: 1.15rem;
+  width: 1.15rem;
+  top: 0.15rem;
+  position: relative;
+}
+
+#TableOfContents {
+    display: block;
+    width: 20em;
+    height: 50vh;
+    position: sticky;
+    z-index: 1;
+    top: 5em;
+    overflow-x: hidden;
+    margin: 0;
+    margin-left: -25em;
+    font-size: 1.1em;
+}
+
+#TableOfContents ul {
+    text-align: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background: var(--sec-bg);
+    border-radius: 0.3em;
+    padding: 0.7em;
+}
+
+#TableOfContents ul li {
+    padding: 0;
+    margin: 0;
+}
+
+#TableOfContents ul li a {
+    padding: 0.3em;
+    text-decoration: none;
+    color: var(--main-fg);
+    font-family: monospace;
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#TableOfContents ul li a:hover {
+    color: var(--link-fg);
+}
+
+
+@media only screen and (max-width: 800px) {
+    nav {
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .menu { text-align: center; }
+
+    .logo { padding-top: 1em; }
+
+    .banner {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .message {
+        margin: auto;
+        padding: 0 3em 1em 3em;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .pagination__buttons {
+        flex-direction: column;
+        margin: 0;
+        padding: 3em 0 0 0;
+        line-height: 3em;
+    }
+    .button a { margin: 0; }
+}
+
+@media only screen and (max-width: 450px) {
+    footer { padding: 2em; }
+    body { width: 100%; margin-right: -3em; }
+}
+
+@media only screen and (max-width: 1700px) {
+    #TableOfContents { font-size: 1em; }
+}
+
+@media only screen and (max-width: 1500px) {
+    #TableOfContents { display: none; }
+    main { margin-top: initial; }
+}

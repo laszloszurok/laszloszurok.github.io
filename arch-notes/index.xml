@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arch-notes on bit-flip</title>
+    <link>http://example.org/arch-notes/</link>
+    <description>Recent content in Arch-notes on bit-flip</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 04 Jul 2020 17:09:50 +0200</lastBuildDate><atom:link href="http://example.org/arch-notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pre-Installation</title>
+      <link>http://example.org/arch-notes/pre-installation/</link>
+      <pubDate>Sat, 04 Jul 2020 17:09:50 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/pre-installation/</guid>
+      <description>Contents of this post: Settings and configurations to prepare the installation. (internet, time and date, partitioning, etc.)</description>
+    </item>
+    
+    <item>
+      <title>Installation</title>
+      <link>http://example.org/arch-notes/installation/</link>
+      <pubDate>Fri, 03 Jul 2020 10:12:02 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/installation/</guid>
+      <description>Contents of this post: Setting up the mirrorlist, Installing the base system</description>
+    </item>
+    
+    <item>
+      <title>Post-Installation</title>
+      <link>http://example.org/arch-notes/post-installation/</link>
+      <pubDate>Thu, 02 Jul 2020 10:14:55 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/post-installation/</guid>
+      <description>Contents of this post: Various settings and configurations after the installation. (timezone, network, user account, etc.)</description>
+    </item>
+    
+    <item>
+      <title>Software setup</title>
+      <link>http://example.org/arch-notes/other-software/</link>
+      <pubDate>Sat, 09 May 2020 18:32:02 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/other-software/</guid>
+      <description>Contents of this post: Settings and configurations for my most used programs (z, zsh, vifm, pywal, etc.)</description>
+    </item>
+    
+    <item>
+      <title>Screenshots</title>
+      <link>http://example.org/arch-notes/screenshots/</link>
+      <pubDate>Tue, 14 Apr 2020 20:48:38 +0200</pubDate>
+      
+      <guid>http://example.org/arch-notes/screenshots/</guid>
+      <description>Contents of this post: Screenshots of my installed system and programs.</description>
+    </item>
+    
+  </channel>
+</rss>
