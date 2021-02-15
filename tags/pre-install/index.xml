@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>pre-install on bit-flip</title>
-    <link>http://example.org/tags/pre-install/</link>
+    <link>https://laszloszurok.github.io/tags/pre-install/</link>
     <description>Recent content in pre-install on bit-flip</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 04 Jul 2020 17:09:50 +0200</lastBuildDate><atom:link href="http://example.org/tags/pre-install/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Jul 2020 17:09:50 +0200</lastBuildDate><atom:link href="https://laszloszurok.github.io/tags/pre-install/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pre-Installation</title>
-      <link>http://example.org/arch-notes/pre-installation/</link>
+      <link>https://laszloszurok.github.io/arch-notes/pre-installation/</link>
       <pubDate>Sat, 04 Jul 2020 17:09:50 +0200</pubDate>
       
-      <guid>http://example.org/arch-notes/pre-installation/</guid>
+      <guid>https://laszloszurok.github.io/arch-notes/pre-installation/</guid>
       <description>Contents of this post: Settings and configurations to prepare the installation. (internet, time and date, partitioning, etc.)</description>
     </item>
     

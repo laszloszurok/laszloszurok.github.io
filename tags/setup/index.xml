@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>setup on bit-flip</title>
-    <link>http://example.org/tags/setup/</link>
+    <link>https://laszloszurok.github.io/tags/setup/</link>
     <description>Recent content in setup on bit-flip</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 09 May 2020 18:32:02 +0200</lastBuildDate><atom:link href="http://example.org/tags/setup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 May 2020 18:32:02 +0200</lastBuildDate><atom:link href="https://laszloszurok.github.io/tags/setup/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Software setup</title>
-      <link>http://example.org/arch-notes/other-software/</link>
+      <link>https://laszloszurok.github.io/arch-notes/other-software/</link>
       <pubDate>Sat, 09 May 2020 18:32:02 +0200</pubDate>
       
-      <guid>http://example.org/arch-notes/other-software/</guid>
+      <guid>https://laszloszurok.github.io/arch-notes/other-software/</guid>
       <description>Contents of this post: Settings and configurations for my most used programs (z, zsh, vifm, pywal, etc.)</description>
     </item>
     

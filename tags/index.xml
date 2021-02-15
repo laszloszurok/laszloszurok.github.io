@@ -2,117 +2,117 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on bit-flip</title>
-    <link>http://example.org/tags/</link>
+    <link>https://laszloszurok.github.io/tags/</link>
     <description>Recent content in Tags on bit-flip</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 18 Aug 2020 22:04:44 +0200</lastBuildDate><atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Aug 2020 22:04:44 +0200</lastBuildDate><atom:link href="https://laszloszurok.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>repeater</title>
-      <link>http://example.org/tags/repeater/</link>
+      <link>https://laszloszurok.github.io/tags/repeater/</link>
       <pubDate>Tue, 18 Aug 2020 22:04:44 +0200</pubDate>
       
-      <guid>http://example.org/tags/repeater/</guid>
+      <guid>https://laszloszurok.github.io/tags/repeater/</guid>
       <description></description>
     </item>
     
     <item>
       <title>router</title>
-      <link>http://example.org/tags/router/</link>
+      <link>https://laszloszurok.github.io/tags/router/</link>
       <pubDate>Tue, 18 Aug 2020 22:04:44 +0200</pubDate>
       
-      <guid>http://example.org/tags/router/</guid>
+      <guid>https://laszloszurok.github.io/tags/router/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wireless</title>
-      <link>http://example.org/tags/wireless/</link>
+      <link>https://laszloszurok.github.io/tags/wireless/</link>
       <pubDate>Tue, 18 Aug 2020 22:04:44 +0200</pubDate>
       
-      <guid>http://example.org/tags/wireless/</guid>
+      <guid>https://laszloszurok.github.io/tags/wireless/</guid>
       <description></description>
     </item>
     
     <item>
       <title>dwm</title>
-      <link>http://example.org/tags/dwm/</link>
+      <link>https://laszloszurok.github.io/tags/dwm/</link>
       <pubDate>Mon, 20 Jul 2020 17:28:04 +0200</pubDate>
       
-      <guid>http://example.org/tags/dwm/</guid>
+      <guid>https://laszloszurok.github.io/tags/dwm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rice</title>
-      <link>http://example.org/tags/rice/</link>
+      <link>https://laszloszurok.github.io/tags/rice/</link>
       <pubDate>Mon, 20 Jul 2020 17:28:04 +0200</pubDate>
       
-      <guid>http://example.org/tags/rice/</guid>
+      <guid>https://laszloszurok.github.io/tags/rice/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tutorial</title>
-      <link>http://example.org/tags/tutorial/</link>
+      <link>https://laszloszurok.github.io/tags/tutorial/</link>
       <pubDate>Mon, 20 Jul 2020 17:28:04 +0200</pubDate>
       
-      <guid>http://example.org/tags/tutorial/</guid>
+      <guid>https://laszloszurok.github.io/tags/tutorial/</guid>
       <description></description>
     </item>
     
     <item>
       <title>arch</title>
-      <link>http://example.org/tags/arch/</link>
+      <link>https://laszloszurok.github.io/tags/arch/</link>
       <pubDate>Sat, 04 Jul 2020 17:09:50 +0200</pubDate>
       
-      <guid>http://example.org/tags/arch/</guid>
+      <guid>https://laszloszurok.github.io/tags/arch/</guid>
       <description></description>
     </item>
     
     <item>
       <title>pre-install</title>
-      <link>http://example.org/tags/pre-install/</link>
+      <link>https://laszloszurok.github.io/tags/pre-install/</link>
       <pubDate>Sat, 04 Jul 2020 17:09:50 +0200</pubDate>
       
-      <guid>http://example.org/tags/pre-install/</guid>
+      <guid>https://laszloszurok.github.io/tags/pre-install/</guid>
       <description></description>
     </item>
     
     <item>
       <title>installation</title>
-      <link>http://example.org/tags/installation/</link>
+      <link>https://laszloszurok.github.io/tags/installation/</link>
       <pubDate>Fri, 03 Jul 2020 10:12:02 +0200</pubDate>
       
-      <guid>http://example.org/tags/installation/</guid>
+      <guid>https://laszloszurok.github.io/tags/installation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>post-install</title>
-      <link>http://example.org/tags/post-install/</link>
+      <link>https://laszloszurok.github.io/tags/post-install/</link>
       <pubDate>Thu, 02 Jul 2020 10:14:55 +0200</pubDate>
       
-      <guid>http://example.org/tags/post-install/</guid>
+      <guid>https://laszloszurok.github.io/tags/post-install/</guid>
       <description></description>
     </item>
     
     <item>
       <title>setup</title>
-      <link>http://example.org/tags/setup/</link>
+      <link>https://laszloszurok.github.io/tags/setup/</link>
       <pubDate>Sat, 09 May 2020 18:32:02 +0200</pubDate>
       
-      <guid>http://example.org/tags/setup/</guid>
+      <guid>https://laszloszurok.github.io/tags/setup/</guid>
       <description></description>
     </item>
     
     <item>
       <title>software</title>
-      <link>http://example.org/tags/software/</link>
+      <link>https://laszloszurok.github.io/tags/software/</link>
       <pubDate>Sat, 09 May 2020 18:32:02 +0200</pubDate>
       
-      <guid>http://example.org/tags/software/</guid>
+      <guid>https://laszloszurok.github.io/tags/software/</guid>
       <description></description>
     </item>
     
