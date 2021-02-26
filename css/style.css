@@ -314,6 +314,7 @@ code.language-terminal::before {
 
 @media only screen and (max-width: 450px) {
     footer { padding: 2em; }
+    .menu a { padding: 0; }
 }
 
 @media only screen and (max-width: 1700px) {
