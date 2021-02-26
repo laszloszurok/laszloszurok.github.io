@@ -1,4 +1,13 @@
-body { font-family: "Courier New", monospace; }
+@font-face {
+    font-family: 'Fira Code';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: block;
+    src: url("../fonts/Fira_Code/FiraCode-VariableFont_wght.ttf") format('truetype'),
+         url("../fonts/Fira_Code/FiraCode-VariableFont_wght.woff2") format('woff2');
+}
+
+body { font-family: "Fira Code", monospace; }
 
 code {
   font-family: "Lucida Console", Monaco, monospace;
@@ -6,18 +15,18 @@ code {
 }
 
 .menu a { 
-    font-family: monospace;
+    font-family: "Fira Code", monospace;
     font-weight: bold; 
-    font-size: 1.1em 
+    font-size: 0.9em;
 }
 
-.title, .message { font-size: 1.1em; }
+.title, .message { font-size: 0.9em; }
 
-.banner { font-family: monospace; }
+.banner { font-family: "Fira Code", monospace; }
 
 .post-list {
-    font-family: monospace;
-    font-size: 1.2em;
+    font-family: "Fira Code", monospace;
+    font-size: 1em;
 }
 
 footer { font-size: 0.9em; }
