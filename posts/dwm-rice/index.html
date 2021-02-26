@@ -249,7 +249,7 @@ st (which is a terminal emulator).</p>
     
     ...
 };
-</code></pre></div><p>If you want to display the curent volume level on the status bar, it will update when you raise or lover the volume with the built-in keys (I have these keys on my laptop).</p>
+</code></pre></div><p>If you want to display the curent volume level on the status bar, it will update when you raise or lower the volume with the built-in keys (I have these keys on my laptop).</p>
 <p>This part:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pkill -RTMIN+10 dwmblocks
 </code></pre></div><p>is the command which updates only the volume indicator. -RTMIN+10 means the indicator with the signal number of 10. (The number you set in dwmblocks/blocks.h)</p>
