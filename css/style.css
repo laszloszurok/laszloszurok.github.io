@@ -315,10 +315,12 @@ code.language-terminal::before {
 @media only screen and (max-width: 450px) {
     footer { padding: 2em; }
     .menu a { padding: 0; }
+    .menu ul { margin-bottom: 1em; }
 }
 
 @media only screen and (max-width: 1700px) {
     #TableOfContents { font-size: 1em; }
+    .banner { margin-top: -4em; }
 }
 
 @media only screen and (max-width: 1500px) {
