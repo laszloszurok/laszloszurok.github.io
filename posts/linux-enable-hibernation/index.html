@@ -63,7 +63,7 @@ initramfs to be able to resume from hibernation.</p>
 </code></pre><p>Copy the UUID of the partition which has the FSTYPE of swap. After that, open /etc/default/grub with a text editor and locate the following line:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">GRUB_CMDLINE_LINUX_DEFAULT=&#34;loglevel=3 quiet&#34;
 </code></pre></div><p>This line is where you pass parameters to the kernel. Add the &lsquo;resume&rsquo; option, using the previously obtained UUID. The correct syntax looks like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">GRUB_CMDLINE_LINUX_DEFAULT=&#34;resume=UUID=51bce307-d233-4abd-a3e4-50fb56010bff loglevel=3 quiet&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">GRUB_CMDLINE_LINUX_DEFAULT=&#34;loglevel=3 quiet resume=UUID=51bce307-d233-4abd-a3e4-50fb56010bff&#34;
 </code></pre></div><p>To apply the changes you have to regenerate the GRUB config file with the following command:</p>
 <pre><code class="language-terminal" data-lang="terminal">sudo grub-mkconfig -o /boot/grub/grub.cfg
 </code></pre><h2 id="modify-the-initramfs">Modify the initramfs</h2>
