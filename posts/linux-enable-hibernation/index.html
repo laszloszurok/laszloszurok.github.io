@@ -57,7 +57,7 @@ hibernation can save precious battery power. In this article I&rsquo;m gonna sho
 initramfs to be able to resume from hibernation.</p>
 <h2 id="kernel-parameters">Kernel parameters</h2>
 <p>You have to pass the &lsquo;resume=<strong>swapdevice</strong>&rsquo; parameter to the kernel. I suggest using the UUID of the swap partition as the argument. You can obtain that with the following command:</p>
-<pre><code class="language-terminal" data-lang="terminal">lslbk -f
+<pre><code class="language-terminal" data-lang="terminal">lsblk -f
 </code></pre><p>Copy the UUID of the partition which has the FSTYPE of swap. After that, open /etc/default/grub with a text editor and locate the following line:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">GRUB_CMDLINE_LINUX_DEFAULT=&#34;loglevel=3 quiet&#34;
 </code></pre></div><p>This line is where you pass parameters to the kernel. Add the &lsquo;resume&rsquo; option, using the previously obtained UUID. The correct syntax looks like this:</p>
