@@ -1,132 +1,83 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
+    <loc>https://laszloszurok.github.io/posts/linux-enable-hibernation/</loc>
+    <lastmod>2021-03-19T20:37:24+01:00</lastmod>
+  </url><url>
+    <loc>https://laszloszurok.github.io/</loc>
+    <lastmod>2021-03-19T20:37:24+01:00</lastmod>
+  </url><url>
+    <loc>https://laszloszurok.github.io/posts/</loc>
+    <lastmod>2021-03-19T20:37:24+01:00</lastmod>
+  </url><url>
     <loc>https://laszloszurok.github.io/posts/wireless-router-repeater/</loc>
     <lastmod>2020-08-18T22:04:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://laszloszurok.github.io/</loc>
-    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://laszloszurok.github.io/posts/</loc>
-    <lastmod>2020-08-18T22:04:44+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/repeater/</loc>
     <lastmod>2020-08-18T22:04:44+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/router/</loc>
     <lastmod>2020-08-18T22:04:44+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/</loc>
     <lastmod>2020-08-18T22:04:44+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/wireless/</loc>
     <lastmod>2020-08-18T22:04:44+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/dwm/</loc>
     <lastmod>2020-07-20T17:28:04+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/posts/dwm-rice/</loc>
     <lastmod>2020-07-20T17:28:04+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/rice/</loc>
     <lastmod>2020-07-20T17:28:04+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/tutorial/</loc>
     <lastmod>2020-07-20T17:28:04+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/arch/</loc>
     <lastmod>2020-07-04T17:09:50+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/arch-notes/</loc>
     <lastmod>2020-07-04T17:09:50+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/pre-install/</loc>
     <lastmod>2020-07-04T17:09:50+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/arch-notes/pre-installation/</loc>
     <lastmod>2020-07-04T17:09:50+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/arch-notes/installation/</loc>
     <lastmod>2020-07-03T10:12:02+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/installation/</loc>
     <lastmod>2020-07-03T10:12:02+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/post-install/</loc>
     <lastmod>2020-07-02T10:14:55+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/arch-notes/post-installation/</loc>
     <lastmod>2020-07-02T10:14:55+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/setup/</loc>
     <lastmod>2020-05-09T18:32:02+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/tags/software/</loc>
     <lastmod>2020-05-09T18:32:02+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/arch-notes/other-software/</loc>
     <lastmod>2020-05-09T18:32:02+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/arch-notes/screenshots/</loc>
     <lastmod>2020-04-14T20:48:38+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/contact/contact/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://laszloszurok.github.io/contact/</loc>
   </url>
-  
 </urlset>

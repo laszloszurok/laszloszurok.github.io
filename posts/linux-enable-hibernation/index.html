@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Enable hibernation in Linux | bit-flip</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/custom-style.css" />
+
+    </head>
+
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="/"><img src="/img/logo.png" alt="logo" id="logo-img" /></a>
+            </div>
+            <div class="menu">
+                <ul class="menu">
+                    
+                    <li><a href="/">Home</a></li>
+                    
+                    <li><a href="/arch-notes/">Arch-notes</a></li>
+                    
+                    <li><a href="/posts/">Posts</a></li>
+                    
+                    <li><a href="/contact/">Contact</a></li>
+                    
+                    <li><a href="/index.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Enable hibernation in Linux</span></h1>
+    
+    <h2 class="date">2021/03/19</h2>
+</div>
+
+
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#kernel-parameters">Kernel parameters</a></li>
+    <li><a href="#modify-the-initramfs">Modify the initramfs</a></li>
+    <li><a href="#using-hibernation">Using hibernation</a></li>
+  </ul>
+</nav>
+
+
+<main>
+    <p>Using hibernation can be useful if you want to leave your system for a longer period of time, but you want to continue your work where you left off. It is especially handy in case of laptops, as
+hibernation can save precious battery power. In this article I&rsquo;m gonna show you how to enable this feature using a swap partition and GRUB.</p>
+<h2 id="requirements">Requirements</h2>
+<p>In order to use hibernation, you need to create a swap partition or swap file. If you have that, you have to pass a special parameter to the linux kernel. Lastly, you gonna have to configure the
+initramfs to be able to resume from hibernation.</p>
+<h2 id="kernel-parameters">Kernel parameters</h2>
+<p>You have to pass the &lsquo;resume=<strong>swapdevice</strong>&rsquo; parameter to the kernel. I suggest using the UUID of the swap partition as the argument. You can obtain that with the following command:</p>
+<pre><code class="language-terminal" data-lang="terminal">lslbk -f
+</code></pre><p>Copy the UUID of the partition which has the FSTYPE of swap. After that, open /etc/default/grub with a text editor and locate the following line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">GRUB_CMDLINE_LINUX_DEFAULT=&#34;loglevel=3 quiet&#34;
+</code></pre></div><p>This line is where you pass parameters to the kernel. Add the &lsquo;resume&rsquo; option, using the previously obtained UUID. The correct syntax looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">GRUB_CMDLINE_LINUX_DEFAULT=&#34;resume=UUID=51bce307-d233-4abd-a3e4-50fb56010bff loglevel=3 quiet&#34;
+</code></pre></div><p>To apply the changes you have to regenerate the GRUB config file with the following command:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre><h2 id="modify-the-initramfs">Modify the initramfs</h2>
+<p>Open /etc/mkinitcpio.conf with a text editor and locate the following line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)
+</code></pre></div><p>You have to add the &lsquo;resume&rsquo; hook to this array, somewhere after udev, so the line will be:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">HOOKS=(base udev autodetect modconf block filesystems keyboard resume fsck)
+</code></pre></div><p>To apply the changes you have to regenerate the initramfs presets with the following command:</p>
+<pre><code class="language-terminal" data-lang="terminal">sudo mkinitcpio -P
+</code></pre><h2 id="using-hibernation">Using hibernation</h2>
+<p>After you finished with the setup process, you have to reboot your computer onece to be able to use hibernation. After that you can use the following command to hibernate your system:</p>
+<pre><code class="language-terminal" data-lang="terminal">systemctl hibernate
+</code></pre>
+</main>
+
+<div class="pagination__buttons">
+    
+
+    
+    <span class="button next">
+        <a href="https://laszloszurok.github.io/posts/wireless-router-repeater/">
+            <span class="button__text">Extend your home network</span>
+            <span class="button__icon">→</span>
+        </a>
+    </span>
+    
+</div>
+</div>
+
+<footer>
+    <div class="copyright">
+
+        <span>&copy; 2021</span>
+        <span><a href="https://laszloszurok.github.io">László Szurok</a></span>
+        <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+
+    </div>
+    <p>The Source Code For This Site Can Be Found On <a href="https://github.com/laszloszurok/laszloszurok.github.io" target="blank">GitHub</a></p>
+
+</footer>
+</body>
+</html>
+
