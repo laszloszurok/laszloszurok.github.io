@@ -15,7 +15,7 @@
       
       <guid>https://laszloszurok.github.io/posts/linux-enable-hibernation/</guid>
       <description>Using hibernation can be useful if you want to leave your system for a longer period of time, but you want to continue your work where you left off. It is especially handy in case of laptops, as hibernation can save precious battery power. In this article I&amp;rsquo;m gonna show you how to enable this feature using a swap partition and GRUB.
-Requirements In order to use hibernation, you need to create a swap partition or swap file.</description>
+Other usecases and a more extensive explanation can be found on the ArchWiki .</description>
     </item>
     
     <item>
